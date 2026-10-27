@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AniTracker - Мой список просмотров</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Подключение CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Шапка сайта -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <i class="fa-solid fa-play logo-icon"></i>
+        <span>Mr<b>Cat</b></span>
+      </div>
+      <div class="header-actions">
+        <button id="btnToggleStats" class="btn btn-secondary" aria-expanded="false" aria-controls="statsPanel">
+          <i class="fa-solid fa-chart-pie"></i> Статистика
+        </button>
+        <button id="btnOpenAddModal" class="btn btn-primary">
+          <i class="fa-solid fa-plus"></i> Добавить
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Атмосферная шапка в цветах закатного неба -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow"><span class="eyebrow-dot"></span> ЛИЧНЫЙ АРХИВ ИСТОРИЙ</p>
+        <h1 id="heroTitle">Истории, к которым хочется <span>вернуться.</span></h1>
+        <p class="hero-description">Аниме, кино и анимация — собранные в одном тихом уголке.</p>
+        <div class="hero-meta">
+          <span><i class="fa-regular fa-sun"></i> Твоя коллекция</span>
+          <span class="hero-meta-divider"></span>
+          <span><i class="fa-solid fa-clapperboard"></i> <b id="heroCount">0 записей</b></span>
+        </div>
+      </div>
+      <div class="hero-sun" aria-hidden="true"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
+    </section>
+
+    <!-- Панель статистики (скрываемая) -->
+    <section id="statsPanel" class="stats-panel hidden">
+      <div class="stats-grid">
+        <button type="button" id="btnStatTotalDetails" class="stat-card stat-card-button" aria-expanded="false" aria-controls="statTypeCountsPanel" title="Показать количество тайтлов по типам">
+          <i class="fa-solid fa-film stat-icon purple"></i>
+          <span class="stat-card-copy">
+            <span class="stat-value" id="statTotal">0</span>
+            <span class="stat-label">Всего тайтлов</span>
+          </span>
+          <i class="fa-solid fa-chevron-down stat-expand-icon" aria-hidden="true"></i>
+        </button>
+        <div class="stat-card">
+          <i class="fa-solid fa-tv stat-icon blue"></i>
+          <div>
+            <div class="stat-value" id="statEpisodes">0</div>
+            <div class="stat-label">Просмотрено серий</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-star stat-icon yellow"></i>
+          <div>
+            <div class="stat-value" id="statAvgRating">0.0</div>
+            <div class="stat-label">Средняя оценка</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-check-circle stat-icon green"></i>
+          <div>
+            <div class="stat-value" id="statCompleted">0</div>
+            <div class="stat-label">Завершено всего</div>
+          </div>
+        </div>
+      </div>
+      <section id="statTypeCountsPanel" class="stat-details hidden" aria-label="Количество тайтлов по типам">
+        <div class="stat-details-header">
+          <div>
+            <h3><i class="fa-solid fa-layer-group"></i> Тайтлы по типам</h3>
+            <p class="stat-details-count">Количество во всей коллекции</p>
+          </div>
+          <button type="button" id="btnCloseStatTypes" class="stat-details-close" aria-label="Закрыть разбивку по типам" title="Закрыть разбивку">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="statTypeCounts" class="stat-type-counts"></div>
+      </section>
+    </section>
+
+    <!-- Панель управления и фильтров -->
+    <section class="controls-card">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Поиск по названию...">
+      </div>
+
+      <div class="filters-group">
+        <!-- Фильтр типов -->
+        <div class="filter-select-wrapper">
+          <label><i class="fa-solid fa-layer-group"></i> Категория:</label>
+          <select id="typeFilter">
+            <option value="all">Все категории</option>
+            <option value="anime">Аниме-сериалы</option>
+            <option value="anime-movie">Аниме-фильмы</option>
+            <option value="tv">Сериалы</option>
+            <option value="movie">Фильмы</option>
+            <option value="cartoon">Мультфильмы</option>
+            <option value="cartoon-series">Мультсериалы</option>
+          </select>
+        </div>
+
+        <!-- Фильтр сортировки -->
+        <div class="filter-select-wrapper">
+          <label><i class="fa-solid fa-sort"></i> Сортировка:</label>
+          <select id="sortSelect">
+            <option value="updated-desc">Сначала новые</option>
+            <option value="rating-desc">По рейтингу (высший)</option>
+            <option value="rating-asc">По рейтингу (низший)</option>
+            <option value="title-asc">По алфавиту (А-Я)</option>
+          </select>
+        </div>
+
+        <!-- Переключатель вида -->
+        <div class="view-toggle">
+          <button id="viewGridBtn" class="toggle-btn active" title="Сетка"><i class="fa-solid fa-border-all"></i></button>
+          <button id="viewTableBtn" class="toggle-btn" title="Таблица"><i class="fa-solid fa-list"></i></button>
+        </div>
+      </div>
+
+      <!-- Вкладки статусов -->
+      <div class="status-tabs" id="statusTabs">
+        <button class="tab-btn active" data-status="all">Все</button>
+        <button class="tab-btn" data-status="watching">Смотрю</button>
+        <button class="tab-btn" data-status="completed">Просмотрено</button>
+        <button class="tab-btn" data-status="planned">В планах</button>
+        <button class="tab-btn" data-status="on_hold">На паузе</button>
+        <button class="tab-btn" data-status="dropped">Брошено</button>
+      </div>
+    </section>
+
+    <!-- Контент: Карточки / Таблица -->
+    <section id="contentContainer">
+      <div id="gridView" class="grid-container"></div>
+      <div id="tableView" class="table-container hidden">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Обложка</th>
+              <th>Название</th>
+              <th>Категория</th>
+              <th>Статус</th>
+              <th>Прогресс</th>
+              <th>Оценка</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty-state hidden">
+        <i class="fa-solid fa-ghost empty-icon"></i>
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить параметры поиска или добавить новый тайтл.</p>
+      </div>
+    </section>
+
+    <!-- Резервное копирование -->
+    <section class="data-management">
+      <button id="btnExport" class="btn btn-outline"><i class="fa-solid fa-download"></i> Экспорт JSON</button>
+      <label class="btn btn-outline custom-file-upload">
+        <input type="file" id="importFile" accept=".json">
+        <i class="fa-solid fa-upload"></i> Импорт JSON
+      </label>
+    </section>
+  </main>
+
+  <!-- Модальное окно создания / редактирования -->
+  <div id="itemModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Добавить в список</h2>
+        <button id="btnCloseModal" class="close-btn">&times;</button>
+      </div>
+      <form id="itemForm">
+        <input type="hidden" id="editItemId">
+        
+        <div class="form-group">
+          <label for="inputTitle">Название *</label>
+          <input type="text" id="inputTitle" required placeholder="Например: Атака титанов">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="selectType">Категория *</label>
+            <select id="selectType" required>
+              <option value="anime">Аниме-сериал</option>
+              <option value="anime-movie">Аниме-фильм</option>
+              <option value="tv">Сериал</option>
+              <option value="movie">Фильм</option>
+              <option value="cartoon">Мультфильм</option>
+              <option value="cartoon-series">Мультсериал</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="selectStatus">Статус *</label>
+            <select id="selectStatus" required>
+              <option value="watching">Смотрю</option>
+              <option value="completed">Просмотрено</option>
+              <option value="planned">В планах</option>
+              <option value="on_hold">На паузе</option>
+              <option value="dropped">Брошено</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputEpisodesWatched">Просмотрено серий</label>
+            <input type="number" id="inputEpisodesWatched" min="0" value="0">
+          </div>
+          <div class="form-group">
+            <label for="inputEpisodesTotal">Всего серий (0 = ?)</label>
+            <input type="number" id="inputEpisodesTotal" min="0" value="0" placeholder="0 = неизвестно">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputRating">Оценка (0–10, шаг 0,1)</label>
+            <input type="number" id="inputRating" min="0" max="10" step="0.1" value="0" placeholder="Например, 8.7">
+          </div>
+          <div class="form-group">
+            <label for="inputPoster">Ссылка на обложку (URL)</label>
+            <input type="url" id="inputPoster" placeholder="https://example.com/poster.jpg">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputNotes">Заметки / Впечатления</label>
+          <textarea id="inputNotes" rows="3" placeholder="Любимый персонаж, мысли о финале..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnCancelModal" class="btn btn-secondary">Отмена</button>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Уведомления Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Подключение JS -->
+  <script src="app.js"></script>
+</body>
+</html>
