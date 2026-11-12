@@ -68,9 +68,31 @@ const STATUS_LABELS = {
   'dropped': 'Брошено'
 };
 
+// Проверка структуры списка без изменения сохранённых данных.
+function isValidItemList(items) {
+  return Array.isArray(items) && items.every(item =>
+    item !== null &&
+    typeof item === 'object' &&
+    !Array.isArray(item) &&
+    typeof item.title === 'string'
+  );
+}
+
+// Некорректное содержимое остаётся в localStorage нетронутым.
+function loadSavedItems() {
+  try {
+    const savedItems = localStorage.getItem('aniTracker_items');
+    if (savedItems === null) return INITIAL_DATA;
+    const parsedItems = JSON.parse(savedItems);
+    return isValidItemList(parsedItems) ? parsedItems : INITIAL_DATA;
+  } catch (error) {
+    return INITIAL_DATA;
+  }
+}
+
 // Состояние приложения
 let state = {
-  items: JSON.parse(localStorage.getItem('aniTracker_items')) || INITIAL_DATA,
+  items: loadSavedItems(),
   viewMode: 'grid', // 'grid' | 'table'
   activeStatus: 'all',
   activeType: 'all',
@@ -560,12 +582,14 @@ function exportData() {
 function importData(e) {
   const file = e.target.files[0];
   if (!file) return;
+  // Позволяет повторно выбрать тот же файл.
+  e.target.value = '';
 
   const reader = new FileReader();
   reader.onload = function(event) {
     try {
       const importedItems = JSON.parse(event.target.result);
-      if (Array.isArray(importedItems)) {
+      if (isValidItemList(importedItems)) {
         state.items = importedItems;
         saveData();
         render();
