@@ -3,8 +3,10 @@
 .plans-body::before{background-image:url('assets/plans-cloud.jpg');opacity:.15}
 .plans-logo{text-decoration:none;color:inherit}
 .plans-page{padding-bottom:70px}
-.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(202,217,210,.36);border-radius:24px;background:#71858f url('assets/plans-cloud.jpg') center 53%/cover no-repeat;box-shadow:0 22px 65px rgba(0,0,0,.22)}
-.plans-hero-shade{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(5,18,16,.72),rgba(9,24,21,.38) 55%,rgba(10,16,14,.08)),linear-gradient(0deg,rgba(7,14,11,.28),transparent 74%)}
+.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(202,217,210,.36);border-radius:24px;background:#273c39;box-shadow:0 22px 65px rgba(0,0,0,.22)}
+.plans-hero::before{content:"";position:absolute;z-index:0;inset:-1.5%;background:url('assets/plans-cloud.jpg') center 53%/cover no-repeat;filter:saturate(1.18) contrast(1.08) brightness(.92);transform:scale(1.02)}
+.plans-hero::after{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 34% 47%,rgba(255,174,94,.18),transparent 42%),linear-gradient(180deg,rgba(8,17,15,.08),transparent 45%,rgba(6,15,13,.20));mix-blend-mode:screen;opacity:.82}
+.plans-hero-shade{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(9,20,24,.76),rgba(15,27,30,.45) 51%,rgba(15,23,24,.10)),linear-gradient(0deg,rgba(8,15,16,.34),transparent 74%)}
 .plans-hero-copy{position:relative;z-index:2;max-width:620px}
 .plans-kicker,.plans-eyebrow{color:#f2c398;font-size:.63rem;font-weight:800;letter-spacing:.18em}
 .plans-kicker{display:flex;align-items:center;gap:9px;margin-bottom:13px}
