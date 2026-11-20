@@ -4,7 +4,7 @@
 .plans-logo{text-decoration:none;color:inherit}
 .plans-page{padding-bottom:70px}
 .plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(202,217,210,.36);border-radius:24px;background:#273c39;box-shadow:0 22px 65px rgba(0,0,0,.22)}
-.plans-hero::before{content:"";position:absolute;z-index:0;inset:-1.5%;background:url('assets/plans-header.jpg') center 53%/cover no-repeat;filter:saturate(1.12) contrast(1.06) brightness(.94);transform:scale(1.02)}
+.plans-hero::before{content:"";position:absolute;z-index:0;inset:-1.5%;background:url('assets/cloud-header (2).jpg') center 20%/cover no-repeat;filter:saturate(1.12) contrast(1.06) brightness(.94);transform:scale(1.02)}
 .plans-hero::after{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 34% 47%,rgba(255,174,94,.18),transparent 42%),linear-gradient(180deg,rgba(8,17,15,.08),transparent 45%,rgba(6,15,13,.20));mix-blend-mode:screen;opacity:.82}
 .plans-hero-shade{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(9,20,24,.76),rgba(15,27,30,.45) 51%,rgba(15,23,24,.10)),linear-gradient(0deg,rgba(8,15,16,.34),transparent 74%)}
 .plans-hero-copy{position:relative;z-index:2;max-width:620px}
