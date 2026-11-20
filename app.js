@@ -232,6 +232,8 @@ function showToast(message) {
 // Главная функция рендеринга
 function render() {
   let filtered = state.items.filter(item => {
+    // Planned titles are managed on plans.html and stay out of the main collection.
+    if (item.status === 'planned') return false;
     const matchesSearch = item.title.toLowerCase().includes(state.searchQuery);
     const matchesStatus = state.activeStatus === 'all' || item.status === state.activeStatus;
     const matchesType = state.activeType === 'all' || item.type === state.activeType;
