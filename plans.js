@@ -100,9 +100,9 @@ function renderRecent() {
 }
 
 function openType(type) {
-  if (!PLANS_TYPE_LABELS[type]) return;
+  if (type !== "all" && !PLANS_TYPE_LABELS[type]) return;
   state.activeType = type;
-  el.typeTitle.textContent = PLANS_TYPE_LABELS[type];
+  el.typeTitle.textContent = type === "all" ? "Все запланированные" : PLANS_TYPE_LABELS[type];
   renderTypeList();
   document.querySelector(".plans-recent").classList.add("hidden");
   document.querySelector(".plans-toolbar").classList.add("hidden");
@@ -112,7 +112,7 @@ function openType(type) {
 }
 
 function renderTypeList() {
-  const items = plannedItems().filter(item => item.type === state.activeType)
+  const items = plannedItems().filter(item => state.activeType === "all" || item.type === state.activeType)
     .slice().sort((a, b) => a.title.localeCompare(b.title, "ru"));
   el.typeCount.textContent = String(items.length);
   el.titleList.innerHTML = items.map(item => "<li>" + escapeHTML(item.title) + "</li>").join("");
@@ -140,7 +140,7 @@ function renderAddTypes() {
 function openAdd() {
   el.addForm.reset();
   el.addError.classList.add("hidden");
-  state.addType = state.activeType || "anime-movie";
+  state.addType = PLANS_TYPE_LABELS[state.activeType] ? state.activeType : "anime-movie";
   renderAddTypes();
   el.addDialog.showModal();
   window.setTimeout(() => el.titleInput.focus(), 0);
@@ -247,7 +247,7 @@ document.getElementById("pickAgain").addEventListener("click", () => {
   el.randomResult.classList.add("hidden");
   el.randomPicker.classList.remove("hidden");
 });
-document.getElementById("showAll").addEventListener("click", () => openType("anime-movie"));
+document.getElementById("showAll").addEventListener("click", () => openType("all"));
 document.getElementById("backToPlans").addEventListener("click", closeType);
 el.categoryGrid.addEventListener("click", event => {
   const button = event.target.closest("[data-type]");
