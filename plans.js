@@ -116,7 +116,11 @@ function renderTypeList() {
   const items = plannedItems().filter(item => state.activeType === "all" || item.type === state.activeType)
     .slice().sort((a, b) => a.title.localeCompare(b.title, "ru"));
   el.typeCount.textContent = String(items.length);
-  el.titleList.innerHTML = items.map(item => "<li>" + escapeHTML(item.title) + "</li>").join("");
+  el.titleList.innerHTML = items.map(item =>
+    '<li><button class="icon-btn delete" style="float:right" type="button" data-remove-id="' +
+    escapeHTML(item.id) + '" aria-label="Удалить ' + escapeHTML(item.title) +
+    '">Удалить</button><span>' + escapeHTML(item.title) + '</span></li>'
+  ).join("");
   el.typeEmpty.classList.toggle("hidden", items.length > 0);
   el.titleList.classList.toggle("hidden", items.length === 0);
 }
@@ -251,6 +255,23 @@ document.getElementById("pickAgain").addEventListener("click", () => {
 });
 document.getElementById("showAll").addEventListener("click", () => openType("all"));
 document.getElementById("backToPlans").addEventListener("click", closeType);
+el.titleList.addEventListener("click", event => {
+  const button = event.target.closest("[data-remove-id]");
+  if (!button) return;
+  const itemIndex = state.items.findIndex(item =>
+    item && String(item.id) === button.dataset.removeId && item.status === "planned"
+  );
+  if (itemIndex < 0) return;
+  const item = state.items[itemIndex];
+  if (!window.confirm('Удалить "' + item.title + '" из «В планах»? Запись будет удалена из всей коллекции.')) return;
+  state.items.splice(itemIndex, 1);
+  if (!saveItems()) {
+    state.items.splice(itemIndex, 0, item);
+    return;
+  }
+  render();
+  showToast("Произведение удалено");
+});
 el.categoryGrid.addEventListener("click", event => {
   const button = event.target.closest("[data-type]");
   if (button) openType(button.dataset.type);
