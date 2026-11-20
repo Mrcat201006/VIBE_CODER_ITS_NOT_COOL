@@ -2,7 +2,7 @@
 .plans-body{--plans-green:#214b42;--plans-mint:#9dc5a8;--plans-gold:#f2b787}
 .plans-logo{text-decoration:none;color:inherit}
 .plans-page{padding-bottom:70px}
-.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(194,215,173,.25);border-radius:24px;background:radial-gradient(ellipse at 63% 45%,rgba(237,198,133,.48),transparent 23%),linear-gradient(105deg,rgba(8,32,28,.92) 0%,rgba(18,59,47,.70) 42%,rgba(49,83,52,.30) 100%),radial-gradient(ellipse at 50% 100%,#bea875 0 7%,#698360 27%,#3e6348 58%,#294f40 100%);box-shadow:0 22px 65px rgba(0,0,0,.22)}
+.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(202,217,210,.36);border-radius:24px;background:#71858f url('assets/cloudscape.jpg') center 53%/cover no-repeat;box-shadow:0 22px 65px rgba(0,0,0,.22)}
 .plans-hero-shade{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(22,39,49,.77),rgba(31,49,57,.40) 52%,rgba(44,55,61,.12)),linear-gradient(0deg,rgba(18,29,35,.36),transparent 74%)}
 .plans-hero-copy{position:relative;z-index:2;max-width:620px}
 .plans-kicker,.plans-eyebrow{color:#f2c398;font-size:.63rem;font-weight:800;letter-spacing:.18em}
