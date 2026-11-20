@@ -2,8 +2,8 @@
 .plans-body{--plans-green:#214b42;--plans-mint:#9dc5a8;--plans-gold:#f2b787}
 .plans-logo{text-decoration:none;color:inherit}
 .plans-page{padding-bottom:70px}
-.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(215,224,184,.24);border-radius:24px;background:#4c7180 url('assets/cloudscape.jpg') center 58%/cover no-repeat;box-shadow:0 22px 65px rgba(0,0,0,.22)}
-.plans-hero-shade{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(5,31,32,.88),rgba(8,39,39,.58) 53%,rgba(12,47,41,.14)),linear-gradient(0deg,rgba(7,26,23,.3),transparent 70%)}
+.plans-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:270px;margin-top:22px;padding:35px 40px;overflow:hidden;border:1px solid rgba(194,215,173,.25);border-radius:24px;background:radial-gradient(ellipse at 63% 45%,rgba(237,198,133,.48),transparent 23%),linear-gradient(105deg,rgba(8,32,28,.92) 0%,rgba(18,59,47,.70) 42%,rgba(49,83,52,.30) 100%),radial-gradient(ellipse at 50% 100%,#bea875 0 7%,#698360 27%,#3e6348 58%,#294f40 100%);box-shadow:0 22px 65px rgba(0,0,0,.22)}
+.plans-hero-shade{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(5,31,28,.88),rgba(10,43,34,.58) 48%,rgba(25,60,38,.10)),linear-gradient(0deg,rgba(13,43,31,.48),transparent 74%)}
 .plans-hero-copy{position:relative;z-index:2;max-width:620px}
 .plans-kicker,.plans-eyebrow{color:#f2c398;font-size:.63rem;font-weight:800;letter-spacing:.18em}
 .plans-kicker{display:flex;align-items:center;gap:9px;margin-bottom:13px}
@@ -14,8 +14,8 @@
 .plans-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
 .plans-random-open{border-color:rgba(225,237,210,.34);background:rgba(7,36,36,.4);color:#f4f0e3}
 .plans-random-open:hover{background:rgba(7,36,36,.66)}
-.plans-sun{position:absolute;z-index:-1;right:14%;top:18%;width:105px;aspect-ratio:1;border-radius:50%;background:rgba(255,211,155,.62);filter:blur(1px);box-shadow:0 0 95px 32px rgba(255,211,155,.24)}
-.plans-clouds{position:absolute;z-index:0;inset:0;pointer-events:none;opacity:.34;background:radial-gradient(ellipse at 75% 72%,rgba(245,235,211,.45) 0 4%,transparent 20%),radial-gradient(ellipse at 88% 60%,rgba(245,235,211,.38) 0 5%,transparent 21%)}
+.plans-sun{position:absolute;z-index:-1;right:25%;top:24%;width:126px;aspect-ratio:1;border-radius:50%;background:rgba(246,211,151,.30);filter:blur(18px);box-shadow:0 0 105px 48px rgba(250,211,150,.22)}
+.plans-clouds{position:absolute;z-index:0;inset:0;pointer-events:none;opacity:.82;background:radial-gradient(ellipse at 9% 3%,rgba(13,39,30,.94) 0 13%,transparent 34%),radial-gradient(ellipse at 32% -7%,rgba(24,57,36,.88) 0 17%,transparent 39%),radial-gradient(ellipse at 90% 0%,rgba(17,48,31,.9) 0 15%,transparent 34%),linear-gradient(72deg,transparent 38%,rgba(190,173,125,.22) 49%,rgba(222,197,139,.30) 53%,transparent 65%),radial-gradient(ellipse at 0% 110%,rgba(24,59,37,.90) 0 15%,transparent 38%),radial-gradient(ellipse at 100% 110%,rgba(28,65,38,.87) 0 17%,transparent 41%)}
 .plans-toolbar{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:28px 0 13px}
 .plans-eyebrow{margin-bottom:5px;color:#f1b482}
 .plans-toolbar h2,.plans-section-head h2,.type-view h2{font-size:1.35rem;letter-spacing:-.04em}
