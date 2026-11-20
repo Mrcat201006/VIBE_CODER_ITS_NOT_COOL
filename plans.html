@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a2425">
+  <title>В планах — AniTracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/Cosmic_cat.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="plans.css">
+</head>
+<body class="plans-body">
+  <header class="navbar">
+    <div class="container nav-content">
+      <a class="logo plans-logo" href="index.html" aria-label="AniTracker — главная">
+        <i class="fa-solid fa-play logo-icon" aria-hidden="true"></i><span>Mr<b>Cat</b></span>
+      </a>
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Коллекция</a>
+      </div>
+    </div>
+  </header>
+  <main class="container plans-page">
+    <section class="plans-hero" aria-labelledby="plansTitle">
+      <div class="plans-hero-shade"></div>
+      <div class="plans-hero-copy">
+        <p class="plans-kicker"><span></span> ЛИЧНАЯ ПОЛКА ИСТОРИЙ</p>
+        <h1 id="plansTitle">Что посмотреть <em>потом?</em></h1>
+        <p>Собирай названия, выбирай настроение и оставляй выбор случаю.</p>
+        <div class="plans-actions">
+          <button class="btn plans-random-open" id="openRandom"><i class="fa-solid fa-shuffle" aria-hidden="true"></i> Случайное произведение</button>
+          <button class="btn btn-primary" id="openAdd"><i class="fa-solid fa-plus" aria-hidden="true"></i> Добавить произведение</button>
+        </div>
+      </div>
+      <div class="plans-sun" aria-hidden="true"></div>
+      <div class="plans-clouds" aria-hidden="true"></div>
+    </section>
+
+    <section class="plans-toolbar" aria-label="Список запланированных произведений">
+      <div>
+        <p class="plans-eyebrow">ТВОЯ КОЛЛЕКЦИЯ</p>
+        <h2>Выбери тип</h2>
+      </div>
+      <div class="plans-total"><strong id="plannedTotal">0</strong><span>в планах</span></div>
+    </section>
+
+    <section id="categoryGrid" class="plans-categories" aria-label="Категории"></section>
+
+    <section class="plans-recent">
+      <div class="plans-section-head">
+        <div><p class="plans-eyebrow">СВЕЖИЕ ИДЕИ</p><h2>Недавно добавлены</h2></div>
+        <button class="text-button" id="showAll">Все запланированные <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      </div>
+      <ul class="recent-list" id="recentList"></ul>
+      <div class="plans-empty hidden" id="overviewEmpty">
+        <span class="empty-sun" aria-hidden="true">☼</span>
+        <h3>Пока здесь тихо</h3>
+        <p>Добавь первое произведение — и оно появится в твоих планах.</p>
+        <button class="btn btn-primary" id="emptyAdd"><i class="fa-solid fa-plus" aria-hidden="true"></i> Добавить произведение</button>
+      </div>
+    </section>
+
+    <section class="type-view hidden" id="typeView" aria-labelledby="typeTitle">
+      <div class="type-view-head">
+        <button class="back-button" id="backToPlans"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> В планы</button>
+        <div><p class="plans-eyebrow">СПИСОК ТИПА</p><h2 id="typeTitle"></h2></div>
+        <span class="type-count" id="typeCount"></span>
+      </div>
+      <ul class="title-list" id="titleList"></ul>
+      <div class="plans-empty hidden" id="typeEmpty">
+        <h3>Список пока пуст</h3>
+        <p>Добавь первое произведение в эту категорию.</p>
+        <button class="btn btn-primary" id="typeEmptyAdd"><i class="fa-solid fa-plus" aria-hidden="true"></i> Добавить произведение</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="plans-dialog" id="addDialog" aria-labelledby="addDialogTitle">
+    <form id="addForm" novalidate>
+      <div class="dialog-head">
+        <div><p class="plans-eyebrow">НОВАЯ ЗАПИСЬ</p><h2 id="addDialogTitle">Добавить в планы</h2></div>
+        <button type="button" class="dialog-close" data-close="addDialog" aria-label="Закрыть"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <fieldset class="type-fieldset">
+        <legend>Типы</legend>
+        <div class="type-options" id="addTypeOptions"></div>
+      </fieldset>
+      <label class="field-label" for="titleInput">Название произведения</label>
+      <input class="plans-input" id="titleInput" name="title" maxlength="140" placeholder="Введите название" autocomplete="off" required>
+      <p class="field-error hidden" id="addError" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="btn btn-secondary" data-close="addDialog">Отмена</button><button type="submit" class="btn btn-primary">Добавить</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="plans-dialog random-dialog" id="randomDialog" aria-labelledby="randomDialogTitle">
+    <div class="dialog-head">
+      <div><p class="plans-eyebrow">ПУСТЬ РЕШИТ СЛУЧАЙ</p><h2 id="randomDialogTitle">Случайное произведение</h2></div>
+      <button type="button" class="dialog-close" data-close="randomDialog" aria-label="Закрыть"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div id="randomPicker">
+      <label class="field-label" for="randomType">Из какой категории выбрать?</label>
+      <select class="plans-input plans-select" id="randomType"></select>
+      <div class="dialog-actions"><button type="button" class="btn btn-primary" id="pickRandom">Выбрать</button></div>
+    </div>
+    <div class="random-result hidden" id="randomResult" aria-live="polite">
+      <p class="plans-eyebrow">ТЕБЕ ПОПАЛОСЬ</p><h3 id="randomTitle"></h3><p id="randomMeta"></p>
+      <div class="dialog-actions"><button type="button" class="btn btn-secondary" id="pickAgain">Ещё вариант</button><button type="button" class="btn btn-primary" data-close="randomDialog">Отлично</button></div>
+    </div>
+    <p class="field-error hidden" id="randomError" role="status"></p>
+  </dialog>
+
+  <div class="plans-toast" id="plansToast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="plans.js"></script>
+</body>
+</html>
