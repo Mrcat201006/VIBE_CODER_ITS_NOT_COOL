@@ -104,6 +104,7 @@ function openType(type) {
   state.activeType = type;
   el.typeTitle.textContent = type === "all" ? "Все запланированные" : PLANS_TYPE_LABELS[type];
   renderTypeList();
+  document.querySelector(".plans-hero").classList.add("hidden");
   document.querySelector(".plans-recent").classList.add("hidden");
   document.querySelector(".plans-toolbar").classList.add("hidden");
   el.categoryGrid.classList.add("hidden");
@@ -125,6 +126,7 @@ function closeType() {
   el.typeView.classList.add("hidden");
   el.categoryGrid.classList.remove("hidden");
   document.querySelector(".plans-toolbar").classList.remove("hidden");
+  document.querySelector(".plans-hero").classList.remove("hidden");
   document.querySelector(".plans-recent").classList.remove("hidden");
 }
 
